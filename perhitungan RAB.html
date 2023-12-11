@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimasi Perhitungan Biaya Bangunan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #totalBiaya {
+            color: #333;
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Estimasi Perhitungan Biaya Bangunan</h2>
+        
+        <form id="estimationForm">
+            <label for="luas">Luas (m<sup>2</sup>):</label>
+            <input type="number" id="luas" name="luas" placeholder="Masukkan luas bangunan dalam meter persegi" required>
+
+            <label for="biayaPerM2">Biaya per Meter Persegi (IDR):</label>
+            <input type="number" id="biayaPerM2" name="biayaPerM2" placeholder="Masukkan biaya per meter persegi dalam Rupiah" required>
+
+            <button type="button" onclick="hitungEstimasi()">Hitung Estimasi</button>
+        </form>
+
+        <div id="result">
+            <h3>Hasil Estimasi Biaya:</h3>
+            <p id="totalBiaya"></p>
+        </div>
+    </div>
+
+    <script>
+        function hitungEstimasi() {
+            var luas = parseFloat(document.getElementById('luas').value);
+            var biayaPerM2 = parseFloat(document.getElementById('biayaPerM2').value);
+
+            if (!isNaN(luas) && !isNaN(biayaPerM2)) {
+                var totalBiaya = luas * biayaPerM2;
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('totalBiaya').innerHTML = 'Total Biaya Bangunan: IDR ' + totalBiaya.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format angka dengan pemisah ribuan
+            } else {
+                alert('Silakan masukkan nilai yang valid untuk luas dan biaya per meter persegi.');
+            }
+        }
+    </script>
+</body>
+</html>
